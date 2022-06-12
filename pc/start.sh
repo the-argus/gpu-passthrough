@@ -58,7 +58,8 @@ echo "unloaded vfio driver"
 
 
 ## Reattach the GPU
-virsh nodedev-reattach $VIRSH_AUDIO > /dev/null 2>&1
+virsh nodedev-reattach $VIRSH_AUDIO #> /dev/null 2>&1
+echo "reattached audio"
 virsh nodedev-reattach $VIRSH_GPU #> /dev/null 2>&1
 echo "reattached gpu"
 
