@@ -22,8 +22,8 @@ echo efi-framebuffer.0 > /sys/bus/platform/drivers/efi-framebuffer/unbind
 echo "killed the console"
 
 ## Detach the GPU
-virsh nodedev-detach $VIRSH_GPU #> /dev/null 2>&1
-virsh nodedev-detach $VIRSH_AUDIO #> /dev/null 2>&1
+virsh nodedev-detach $VIRSH_GPU --driver=vfio #> /dev/null 2>&1
+virsh nodedev-detach $VIRSH_AUDIO --driver=vfio #> /dev/null 2>&1
 echo "detached the gpu"
 
 ## unload existing drivers
@@ -38,7 +38,7 @@ modprobe vfio-pci
 echo "loaded vfio driver"
 
 ## QEMU (VM) command
-$IMAGES/qemu.sh &
+./qemu.sh &
 echo "finished qemu, now waiting"
 
 ## Wait for QEMU

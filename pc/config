@@ -12,7 +12,6 @@ audioid="1002 ab38"
 RAM=10G
 CORES=4
 
-IMAGES=/home/archmage/Systems/Windows
 SIZE="100G"
 ISO_PATH=enterprise.iso
 VIRTIO_PATH=virtio.iso
