@@ -6,30 +6,33 @@ GPU : AMD ATI Radeon RX 5600
 CPU : AMD Ryzen 5 3600 (12) @ 3.600GHz
 ```
 
-# process
+# steps
 
-- install qemu
+# install qemu
+- using your (systemd) distro's package manager, install qemu and libvirt.
 
-- get the isos:
-enterprise.iso: check the helpful link
-virtio.iso: 	https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
+# get the isos
+- enterprise.iso: check the helpful link
+- virtio.iso: 	https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
 
+# configure grub
 - add ``amd_iommu=on iommu=pt`` to your kernel parameters (``/etc/default/grub`` and then regenerate grub.cfg) 
 
-- change the config
-VM_USER should be equal to your username
-other values like SMP and MEM should match your system
-change IOMMU groups (like VIRSH_GPU) to match the groups on your system
+# change the config
+- VM_USER should be equal to your username
+- other values like SMP and MEM should match your system
+- change IOMMU groups (like VIRSH_GPU) to match the groups on your system
 
 - run create-disk-image.sh
 
-add the following lines to ``/etc/libvirt/qemu.conf``
+# add the following lines
+- to ``/etc/libvirt/qemu.conf``
 
 ```
 group = "qemu"
 user = "you_user_name" # replace this with your... user name
 ```
-add the following lines to ``/etc/libvirt/libvirtd.conf``
+- to ``/etc/libvirt/libvirtd.conf``
 ```
 # get libvirt to log stuff
 log_filters="1:qemu"
