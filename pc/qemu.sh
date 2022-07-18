@@ -23,6 +23,7 @@ else
         -m $RAM \
         -rtc clock=host,base=localtime \
         -smp $CORES \
+        -nographic \
         -cpu host,kvm=on,hv_relaxed,hv_spinlocks=0x1fff,hv_time,hv_vapic,hv_vendor_id=0xDEADBEEFFF \
         -bios /usr/share/edk2-ovmf/x64/OVMF_CODE.fd \
         -device vfio-pci,host=$IOMMU_GPU,x-vga=on,romfile=$ROMFILE \
@@ -30,8 +31,8 @@ else
         -usb \
         -device usb-host,hostbus=1,hostport=5 \
         -device usb-host,hostbus=1,hostport=6 \
-        -device virtio-net-pci,netdev=n1 \
-        -netdev user,id=n1 \
         -drive file=$WINDOWS_IMG,media=disk,format=raw >> $LOG 2>&1
+        # -device virtio-net-pci,netdev=n1 \
+        # -netdev user,id=n1 \
 fi
 
