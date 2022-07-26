@@ -27,11 +27,11 @@ else
         -cpu host,kvm=on,hv_relaxed,hv_spinlocks=0x1fff,hv_time,hv_vapic,hv_vendor_id=0xDEADBEEFFF \
         -bios /usr/share/edk2-ovmf/x64/OVMF_CODE.fd \
         -device vfio-pci,host=$IOMMU_GPU,x-vga=on,romfile=$ROMFILE \
+        -device vfio-pci,host=$IOMMU_GPU_AUDIO \
         -usb \
         -device usb-host,hostbus=1,hostport=5 \
         -device usb-host,hostbus=1,hostport=6 \
         -drive file=$WINDOWS_IMG,media=disk,format=raw >> $LOG 2>&1
-        # -device vfio-pci,host=$IOMMU_GPU_AUDIO \
         # -device virtio-net-pci,netdev=n1 \
         # -netdev user,id=n1 \
 fi

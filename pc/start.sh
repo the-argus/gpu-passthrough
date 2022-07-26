@@ -23,7 +23,7 @@ echo "killed the console"
 
 ## Detach the GPU
 virsh nodedev-detach $VIRSH_GPU --driver=vfio #> /dev/null 2>&1
-# virsh nodedev-detach $VIRSH_AUDIO --driver=vfio #> /dev/null 2>&1
+virsh nodedev-detach $VIRSH_AUDIO --driver=vfio #> /dev/null 2>&1
 echo "detached the gpu"
 
 ## unload existing drivers
@@ -48,7 +48,7 @@ wait
 echo "finished waiting"
 
 # reload graphics drivers
-# modprobe snd_hda_intel
+modprobe snd_hda_intel
 modprobe amdgpu
 echo "reloaded amd graphics drivers"
 
@@ -60,7 +60,7 @@ echo "unloaded vfio driver"
 
 
 ## Reattach the GPU
-# virsh nodedev-reattach $VIRSH_AUDIO #> /dev/null 2>&1
+virsh nodedev-reattach $VIRSH_AUDIO #> /dev/null 2>&1
 echo "reattached audio"
 virsh nodedev-reattach $VIRSH_GPU #> /dev/null 2>&1
 echo "reattached gpu"
