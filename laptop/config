@@ -1,0 +1,32 @@
+#!/bin/bash
+VM_USER=argus
+
+IOMMU_GPU="00:02.0"
+IOMMU_GPU_AUDIO="00:1f.3"
+VIRSH_GPU=pci_0000_00_02_0
+VIRSH_AUDIO=pci_0000_00_1f_3
+
+AUDIO_MODULE="sof-audio-pci-intel-tgl"
+VIDEO_MODULE="i915"
+
+videoid="8086 9a49"
+audioid="8086 a0c8"
+
+RAM=10G
+CORES=4
+
+SIZE="60G"
+ISO_PATH=enterprise.iso
+VIRTIO_PATH=virtio.iso
+WINDOWS_IMG="disk_image"
+# ROMFILE="AMD_Radeon_RX_5700_Navi_10_017-001-000-042-012565.rom"
+ROMFILE=""
+
+LOG=./log.txt
+
+OVMF=/etc/ovmf/OVMF_CODE.fd
+OVMF_VARS=/etc/ovmf/OVMF_VARS.fd
+
+## Ulimit
+ULIMIT=$(ulimit -a | grep "max locked memory" | awk '{print $6}')
+ULIMIT_TARGET=$(( $(echo $RAM | tr -d 'G')*1048576+100000 ))
