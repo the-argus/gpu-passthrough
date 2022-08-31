@@ -4,7 +4,7 @@
 [[ "$EUID" -ne 0 ]] && echo "Please run as root" && exit 1
 
 ## Load the config file
-source config
+source ./config
 echo "loaded config"
 
 ## Check libvirtd

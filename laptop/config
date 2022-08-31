@@ -22,7 +22,7 @@ WINDOWS_IMG="disk_image"
 # ROMFILE="AMD_Radeon_RX_5700_Navi_10_017-001-000-042-012565.rom"
 ROMFILE=""
 
-LOG=./log.txt
+LOG=./qemu-log.txt
 
 OVMF=/etc/ovmf/OVMF_CODE.fd
 OVMF_VARS=/etc/ovmf/OVMF_VARS.fd
