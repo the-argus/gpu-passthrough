@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 ## Outputs the IOMMU groups and the devices inside them
 ## Source [https://wiki.installgentoo.com/index.php/PCI_passthrough#Step_2:_Find_out_your_IOMMU_groups]
 for iommu_group in \
