@@ -5,9 +5,13 @@ IOMMU_GPU="00:02.0"
 IOMMU_GPU_AUDIO="00:1f.3"
 VIRSH_GPU=pci_0000_00_02_0
 VIRSH_AUDIO=pci_0000_00_1f_3
+VIRSH_AUDIO_SECONDARY=pci_0000_00_1f_0
+IOMMU_AUDIO_SECONDARY="00:1f.0"
 
-AUDIO_MODULE="sof-audio-pci-intel-tgl"
+AUDIO_MODULE="snd_hda_intel"
 VIDEO_MODULE="i915"
+
+AUDIO_MODULE_SECONDARY="snd_sof_pci_intel_tgl"
 
 videoid="8086 9a49"
 audioid="8086 a0c8"

@@ -24,11 +24,18 @@ echo "killed the console"
 ## Detach the GPU
 virsh nodedev-detach $VIRSH_GPU --driver=vfio #> /dev/null 2>&1
 virsh nodedev-detach $VIRSH_AUDIO --driver=vfio #> /dev/null 2>&1
+virsh nodedev-detach $VIRSH_AUDIO_SECONDARY --driver=vfio #> /dev/null 2>&1
+virsh nodedev-detach pci_0000_00_1f_4 --driver=vfio #> /dev/null 2>&1
+virsh nodedev-detach pci_0000_00_1f_5 --driver=vfio #> /dev/null 2>&1
 echo "detached the gpu"
 
 ## unload existing drivers
 modprobe -r $VIDEO_MODULE
 modprobe -r $AUDIO_MODULE
+modprobe -r $AUDIO_MODULE_SECONDARY
+modprobe -r i801_smbus
+modprobe -r intel-spi
+# also maybe i2c_i801 and spi_intel_pci
 echo "unloaded existing drivers"
 
 ## Load vfio
@@ -36,8 +43,6 @@ modprobe vfio
 modprobe vfio_iommu_type1
 modprobe vfio-pci
 echo "loaded vfio driver"
-
-lspci -nnk > lspci.txt
 
 ## QEMU (VM) command
 ./qemu.sh &
@@ -49,8 +54,11 @@ echo "finished waiting"
 
 # reload graphics drivers
 modprobe $AUDIO_MODULE
+modprobe $AUDIO_MODULE_SECONDARY
 modprobe $VIDEO_MODULE
-echo "reloaded amd graphics drivers"
+modprobe i801_smbus
+modprobe intel-spi
+echo "reloaded graphics drivers"
 
 ## Unload vfio
 modprobe -r vfio-pci
@@ -64,6 +72,10 @@ virsh nodedev-reattach $VIRSH_AUDIO #> /dev/null 2>&1
 echo "reattached audio"
 virsh nodedev-reattach $VIRSH_GPU #> /dev/null 2>&1
 echo "reattached gpu"
+virsh nodedev-reattach $VIRSH_AUDIO_SECONDARY #> /dev/null 2>&1
+echo "reattached secondary audio device"
+virsh nodedev-reattach pci_0000_00_1f_4 #> /dev/null 2>&1
+virsh nodedev-reattach pci_0000_00_1f_5 #> /dev/null 2>&1
 
 ## Reload the framebuffer and console
 echo 1 > /sys/class/vtconsole/vtcon0/bind

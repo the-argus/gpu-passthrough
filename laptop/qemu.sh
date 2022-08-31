@@ -28,6 +28,9 @@ else
         -bios /etc/ovmf/OVMF_CODE.fd \
         -device vfio-pci,host=$IOMMU_GPU,x-vga=on,romfile=$ROMFILE \
         -device vfio-pci,host=$IOMMU_GPU_AUDIO \
+        -device vfio-pci,host=$IOMMU_AUDIO_SECONDARY \
+        -device vfio-pci,host="00:1f.4" \
+        -device vfio-pci,host="00:1f.5" \
         -usb \
         -device usb-host,hostbus=1,hostport=5 \
         -device usb-host,hostbus=1,hostport=6 \
