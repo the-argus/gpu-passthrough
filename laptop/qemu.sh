@@ -27,7 +27,7 @@ else
         -m $RAM \
         -rtc clock=host,base=localtime \
         -smp $CORES,sockets=1,cores=$(( $CORES / 2 )),threads=2 \
-        -nographic -vga none -parallel none -serial none \
+        -parallel none -serial none \
         -cpu host,kvm=off,hv_relaxed,hv_spinlocks=0x1fff,hv_time,hv_vapic,hv_vendor_id=0xDEADBEEFFF \
         -bios /etc/ovmf/OVMF_CODE.fd \
         -device virtio-net-pci,netdev=n1 \
