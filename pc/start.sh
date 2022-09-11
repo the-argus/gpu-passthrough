@@ -28,13 +28,13 @@ echo "detached the gpu"
 
 ## unload existing drivers
 modprobe -r amdgpu
-# modprobe -r snd_hda_intel
+modprobe -r snd_hda_intel
 echo "unloaded existing drivers"
 
 ## Load vfio
-modprobe vfio
 modprobe vfio_iommu_type1
-modprobe vfio-pci
+modprobe vfio
+# modprobe vfio-pci
 echo "loaded vfio driver"
 
 ## QEMU (VM) command
@@ -51,9 +51,9 @@ modprobe amdgpu
 echo "reloaded amd graphics drivers"
 
 ## Unload vfio
-modprobe -r vfio-pci
-modprobe -r vfio_iommu_type1
+# modprobe -r vfio-pci
 modprobe -r vfio
+modprobe -r vfio_iommu_type1
 echo "unloaded vfio driver"
 
 
