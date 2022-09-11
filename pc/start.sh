@@ -26,9 +26,23 @@ virsh nodedev-detach $VIRSH_GPU --driver=vfio #> /dev/null 2>&1
 virsh nodedev-detach $VIRSH_AUDIO --driver=vfio #> /dev/null 2>&1
 echo "detached the gpu"
 
+# kill pipewire
+pipewire_pid=$(pgrep -u $VM_USER pipewire)
+echo killing $pipewire_pid
+kill $pipewire_pid
+# kill xserver
+x_pid=$(pgrep -u $VM_USER startx)
+echo killing $x_pid
+kill $x_pid
+
 ## unload existing drivers
 modprobe -r amdgpu
-modprobe -r snd_hda_intel
+modprobe -r gpu_sched
+modprobe -r ttm
+modprobe -r drm_kms_helper
+modprobe -r i2c_algo_bit
+modprobe -r drm
+# modprobe -r snd_hda_intel
 echo "unloaded existing drivers"
 
 ## Load vfio
@@ -47,6 +61,11 @@ echo "finished waiting"
 
 # reload graphics drivers
 modprobe snd_hda_intel
+modprobe drm
+modprobe i2c_algo_bit
+modprobe drm_kms_helper
+modprobe ttm
+modprobe gpu_sched
 modprobe amdgpu
 echo "reloaded amd graphics drivers"
 

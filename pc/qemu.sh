@@ -21,9 +21,9 @@ else
     qemu-system-x86_64 -runas $VM_USER \
         -enable-kvm \
         -m $RAM \
+        -vga none -nographic \
         -rtc clock=host,base=localtime \
         -smp $CORES \
-        -nographic \
         -cpu host,kvm=on,hv_relaxed,hv_spinlocks=0x1fff,hv_time,hv_vapic,hv_vendor_id=0xDEADBEEFFF \
         -bios $OVMF \
         -device vfio-pci,host=$IOMMU_GPU,x-vga=on,romfile=$ROMFILE \
