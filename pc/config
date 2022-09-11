@@ -20,8 +20,8 @@ ROMFILE="AMD_Radeon_RX_5700_Navi_10_017-001-000-042-012565.rom"
 
 LOG=./log.txt
 
-OVMF=/usr/share/ovmf/x64/OVMF_CODE.fd
-OVMF_VARS=/usr/share/ovmf/x64/OVMF_VARS.fd
+OVMF=/etc/ovmf/OVMF_CODE.fd
+OVMF_VARS=/etc/ovmf/OVMF_VARS.fd
 
 ## Ulimit
 ULIMIT=$(ulimit -a | grep "max locked memory" | awk '{print $6}')
