@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
 ## Check if the script was executed as root
 [[ "$EUID" -ne 0 ]] && echo "Please run as root" && exit 1
 
 ## Load the config file
-source config
+source ./config
 echo "loaded config"
 
 ## Check libvirtd
@@ -36,8 +36,6 @@ modprobe vfio
 modprobe vfio_iommu_type1
 modprobe vfio-pci
 echo "loaded vfio driver"
-
-lspci -nnk > lspci.txt
 
 ## QEMU (VM) command
 ./qemu.sh &

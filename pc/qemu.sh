@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # useful for understanding usb passthrough options (by port, product, etc)
 # https://unix.stackexchange.com/questions/452934/can-i-pass-through-a-usb-port-via-qemu-command-line
@@ -21,6 +21,7 @@ else
     qemu-system-x86_64 -runas $VM_USER \
         -enable-kvm \
         -m $RAM \
+        -vga none \
         -rtc clock=host,base=localtime \
         -smp $CORES \
         -nographic \

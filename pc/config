@@ -1,5 +1,5 @@
 #!/bin/bash
-VM_USER=archmage
+VM_USER=argus
 
 IOMMU_GPU="2f:00.0"
 IOMMU_GPU_AUDIO="2f:00.1"
