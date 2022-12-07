@@ -1,5 +1,7 @@
 #!/bin/sh
 
+source ./config
+
 # reload graphics drivers
 modprobe snd_hda_intel
 modprobe drm
