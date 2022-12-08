@@ -26,13 +26,13 @@ else
         -smp $CORES \
         -cpu host,kvm=on,hv_relaxed,hv_spinlocks=0x1fff,hv_time,hv_vapic,hv_vendor_id=0xDEADBEEFFF \
         -bios $OVMF \
-        -device vfio-pci,host=$IOMMU_GPU,x-vga=on,romfile=$ROMFILE \
+        -device vfio-pci,host=$IOMMU_GPU,x-vga=on \
         -device vfio-pci,host=$IOMMU_GPU_AUDIO \
         -device virtio-net-pci,netdev=n1 \
         -netdev user,id=n1 \
-        -usb \
-        -device usb-host,hostbus=1,hostport=5 \
-        -device usb-host,hostbus=1,hostport=6 \
         -drive file=$WINDOWS_IMG,media=disk,format=raw >> $LOG 2>&1
+        # -usb \
+        # -device usb-host,hostbus=1,hostport=5 \
+        # -device usb-host,hostbus=1,hostport=6 \
 fi
 

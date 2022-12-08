@@ -12,13 +12,18 @@ echo "loaded config"
 echo "started libvirtd"
 
 ## Memory lock limit
-[[ $ULIMIT != $ULIMIT_TARGET ]] && ulimit -l $ULIMIT_TARGET
-echo "set memory lock limit"
+# [[ $ULIMIT != $ULIMIT_TARGET ]] && ulimit -l $ULIMIT_TARGET
+# echo "set memory lock limit"
 
 ## Detach the GPU
 virsh nodedev-detach $VIRSH_GPU --driver=vfio #> /dev/null 2>&1
-# virsh nodedev-detach $VIRSH_AUDIO --driver=vfio #> /dev/null 2>&1
+virsh nodedev-detach $VIRSH_AUDIO --driver=vfio #> /dev/null 2>&1
 echo "detached the gpu"
+
+modprobe -r nouveau
+modprobe -r nvidiafb
+modprobe -r snd_hda_intel
+echo "modprobe -r gpu kernel modules"
 
 ## Load vfio
 modprobe vfio_iommu_type1

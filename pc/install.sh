@@ -10,9 +10,9 @@ source ./config
     # -netdev user,id=n1 \
     # -rtc clock=host,base=localtime \
     # -boot order=bcd \
+    # -enable-kvm \
 
 qemu-system-x86_64 \
-    -enable-kvm \
     -m $RAM \
     -smp $CORES \
     -bios /etc/ovmf/OVMF_CODE.fd \
