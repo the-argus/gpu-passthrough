@@ -1,5 +1,4 @@
 disk_image
 *.iso
-*.rom
 log.txt
 qemu-log.txt
