@@ -6,16 +6,16 @@ source ./config
 # and https://gitlab.com/YuriAlek/vfio/-/wikis/Use#windows
 
 # when loading the virtio drivers, use E:\vioscsi\w10\amd64\vioscsi.inf
+    # -device virtio-net-pci,netdev=n1 \
+    # -netdev user,id=n1 \
+    # -rtc clock=host,base=localtime \
+    # -boot order=bcd \
 
 qemu-system-x86_64 \
     -enable-kvm \
     -m $RAM \
     -smp $CORES \
     -bios /etc/ovmf/OVMF_CODE.fd \
-    -device virtio-net-pci,netdev=n1 \
-    -netdev user,id=n1 \
-    -rtc clock=host,base=localtime \
-    -boot order=bcd \
     -drive file=$ISO_PATH,if=none,media=cdrom,id=cd1 \
     -device ide-cd,bus=ide.1,drive=cd1 \
     -drive file=$VIRTIO_PATH,media=cdrom,if=none,id=cd2 \

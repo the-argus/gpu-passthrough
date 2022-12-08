@@ -1,5 +1,5 @@
 #!/bin/sh
 
-source config
+source ./config
 
 qemu-img create -f raw disk_image $SIZE
